@@ -1,0 +1,27 @@
+name: MonsterApplication
+
+on: [push]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    name: Deployment using surge
+    steps:
+      - uses: actions/checkout@v2
+      - name: Install node.js
+        uses: actions/setup-node@v2-beta
+        with:
+          node-version: 12
+          
+      - uses: borales/actions-yarn@v2.0.0
+        with:
+          cmd: install 
+
+      - name: React Create App Using Yarn
+        run: yarn build
+
+      - name: Install Surge
+        run: npm install -g surge
+
+      - name: Run surge
+        run: surge ./build asad-react-deploy1.surge.sh/ --token ${{secrets.SURGE_TOKEN}}
