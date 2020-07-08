@@ -1,4 +1,4 @@
-name: MonsterApplication
+name: bootcamp continous CI
 
 on: [push]
 
@@ -24,4 +24,4 @@ jobs:
         run: npm install -g surge
 
       - name: Run surge
-        run: surge ./build monsterapp-deploy1.surge.sh/ --token ${{secrets.SURGE_TOKEN}}
+        run: surge ./build monsterapp-1.surge.sh/ --token ${{secrets.TOKEN}}
