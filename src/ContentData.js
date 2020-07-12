@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import './App.css'
 import { CardList } from './Component'
 export class ContentDataa extends Component {
     constructor() {
@@ -43,7 +44,8 @@ export class ContentDataa extends Component {
         this.state = {
             monsters: [
 
-            ]
+            ],
+            searchField: ''
         }
     }
     componentDidMount() {
@@ -52,9 +54,18 @@ export class ContentDataa extends Component {
             .then(users => this.setState({ monsters: users })) //converting that response to Json format and providing to MonsterNames 
     }
     render() {
+        const { monsters, searchField } = this.state//== const monster = this.state.monster
+        const filteredMonster = monsters.filter(monster => monster.name.toLowerCase().includes(searchField.toLowerCase())
+        )
         return (
-            <div >
-                <CardList monsters={this.state.monsters} />
+
+            <div className="App">
+                <h1 className="h1">Monster Redolox </h1>
+                <input type="search" onChange={e => {
+                    this.setState({ searchField: e.target.value })
+                }} />
+
+                <CardList monsters={filteredMonster} />
                 {/* 
                 <CardList names={this.state.Names}>
                     {this.state.Names.map(Name => (         //every name is getting inside of Name by itterating as Name.name
